@@ -1,11 +1,9 @@
 from fastapi import APIRouter
 
-from backend.service.get_twitch_videos_by_game import get_twitch_videos_by_game
+from backend.service.videos import get_twitch_videos_by_game
  
 router = APIRouter()
 
-@router.get("/")
-async def root():
-    videos = get_twitch_videos_by_game("civilization")
-
-    return {f"Videos: {videos}"}
+@router.get("/videos/")
+async def get_videos(game_name: str):
+    return {"videos": get_twitch_videos_by_game(game_name)}
