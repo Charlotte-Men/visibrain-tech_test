@@ -1,10 +1,6 @@
 import requests
-import os
 import time
-from backend.config import TWITCH_GET_TOKEN_URL
-
-TWITCH_CLIENT_ID = os.getenv("TWITCH_CLIENT_ID")
-TWITCH_CLIENT_SECRET = os.getenv("TWITCH_CLIENT_SECRET")
+from backend.config import TWITCH_GET_TOKEN_URL, TWITCH_CLIENT_ID, TWITCH_CLIENT_SECRET
 
 # Cached token storage
 cached_token = {"access_token": None, "expires_at": 0}
