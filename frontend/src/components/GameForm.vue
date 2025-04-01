@@ -13,15 +13,17 @@
 </template>
 
 <script>
+import { fetchVideosByGame } from "../services/api";
 import { ref } from "vue";
 
 export default {
   setup() {
     const gameName = ref("");
 
-    function searchVideos() {
+    async function searchVideos() {
       if (gameName.value.trim()) {
-        console.log(gameName.value)
+        const result = await fetchVideosByGame(gameName.value.trim())
+        result && console.log(result)
       }
     };
 
