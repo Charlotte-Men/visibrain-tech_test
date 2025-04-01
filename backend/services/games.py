@@ -1,10 +1,9 @@
 from fastapi import HTTPException
 
 from backend.config import TWITCH_GET_GAME_INFOS_URL
-from backend.service.twitch_api import TwitchAPI
+from backend.services.twitch_api import TwitchAPI
 
 from backend.db.database import games_collection
-
 
 async def get_twitch_game_id(game_name: str):
     """

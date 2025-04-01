@@ -1,6 +1,6 @@
 from backend.config import TWITCH_GET_VIDEOS_INFOS_URL
-from backend.service.games import get_twitch_game_id
-from backend.service.twitch_api import TwitchAPI
+from backend.services.games import get_twitch_game_id
+from backend.services.twitch_api import TwitchAPI
 
 async def get_twitch_videos_by_game(game_name: str):
     """

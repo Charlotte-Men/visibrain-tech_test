@@ -2,7 +2,7 @@ import requests
 from fastapi import HTTPException
 
 from backend.config import TWITCH_CLIENT_ID
-from backend.service.twitch_auth import TwitchAuth
+from backend.services.twitch_auth import TwitchAuth
 
 class TwitchAPI:
     @staticmethod

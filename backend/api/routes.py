@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from backend.service.videos import get_twitch_videos_by_game
+from backend.services.videos import get_twitch_videos_by_game
  
 router = APIRouter()
 
