@@ -35,7 +35,7 @@ async def get_twitch_game_id(game_name: str):
         game = Game(name=game_name.lower(), id=game_id)
 
         # Save game_id in MongoDB for future use
-        await games_collection.insert_one(game.dict())
+        await games_collection.insert_one(game.model_dump())
         
         return game.id
 
