@@ -1,5 +1,6 @@
 from fastapi import HTTPException
 
+from backend.models.game import Game
 from backend.config import TWITCH_GET_GAME_INFOS_URL
 from backend.services.twitch_api import TwitchAPI
 
@@ -15,7 +16,7 @@ async def get_twitch_game_id(game_name: str):
     cached_game = await games_collection.find_one({"name": game_name.lower()})
 
     if cached_game:
-        return cached_game["id"]
+        return Game(**cached_game).id
     
     # If not cached, fetch from Twitch API
     data = TwitchAPI.make_request(TWITCH_GET_GAME_INFOS_URL, {"name": game_name})
@@ -23,9 +24,12 @@ async def get_twitch_game_id(game_name: str):
     if data:
         game_id = data[0]["id"]
 
+        game = Game(name=game_name.lower(), id=game_id)
+
         # Save game_id in MongoDB for future use
-        await games_collection.insert_one({"name": game_name.lower(), "id": game_id})
+        # Convert model to dict before inserting
+        await games_collection.insert_one(game.dict())
         
-        return game_id
+        return game.id
 
     raise HTTPException(status_code=404, detail="Game not found")
