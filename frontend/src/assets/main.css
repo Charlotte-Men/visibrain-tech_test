@@ -14,3 +14,30 @@ button {
 h1 {
   margin: 16px 0;
 }
+
+a {
+  text-decoration-line: none;
+  color: var(--color-text);
+}
+
+.videos-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.video-wrapper {
+  display: flex;
+  gap: 16px;
+}
+
+.video-thumbnail {
+  width: 160px;
+  height: auto;
+}
+
+.video-text-wrapper {
+  display: flex;
+  flex-direction: column;
+}
