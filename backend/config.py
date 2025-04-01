@@ -10,3 +10,6 @@ TWITCH_CLIENT_SECRET = os.getenv("TWITCH_CLIENT_SECRET")
 TWITCH_GET_GAME_INFOS_URL="https://api.twitch.tv/helix/games"
 TWITCH_GET_TOKEN_URL="https://id.twitch.tv/oauth2/token"
 TWITCH_GET_VIDEOS_INFOS_URL="https://api.twitch.tv/helix/videos"
+
+MONGO_URI = os.getenv("MONGO_URI")
+MONGO_DB_NAME = os.getenv("MONGO_DB_NAME")

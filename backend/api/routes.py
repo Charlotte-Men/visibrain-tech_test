@@ -6,4 +6,6 @@ router = APIRouter()
 
 @router.get("/videos/")
 async def get_videos(game_name: str):
-    return {"videos": get_twitch_videos_by_game(game_name)}
+    videos = await get_twitch_videos_by_game(game_name)
+    
+    return {"Videos": videos}
