@@ -1,5 +1,5 @@
 <script setup>
-  import GameForm from './components/GameForm.vue'
+  import VideoContainer from './components/VideoContainer.vue'
 </script>
  
 <template>
@@ -8,6 +8,6 @@
   </header>
 
   <main>
-    <GameForm />
+    <VideoContainer />
   </main>
 </template>
