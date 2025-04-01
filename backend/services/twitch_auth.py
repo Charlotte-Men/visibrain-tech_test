@@ -1,6 +1,11 @@
 import requests
 import time
+import logging
+
 from backend.config import TWITCH_GET_TOKEN_URL, TWITCH_CLIENT_ID, TWITCH_CLIENT_SECRET
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 class TwitchAuth:
     _cached_token = {"access_token": None, "expires_at": 0}
@@ -15,7 +20,11 @@ class TwitchAuth:
         current_time = time.time()
 
         if cls._cached_token["access_token"] and current_time < cls._cached_token["expires_at"]:
+            logger.info("Using cached Twitch access token")
+
             return cls._cached_token["access_token"]
+
+        logger.info("Fetching new Twitch access token")
 
         payload = {
             "client_id": TWITCH_CLIENT_ID,
@@ -29,6 +38,9 @@ class TwitchAuth:
         if "access_token" in token_data and "expires_in" in token_data:
             cls._cached_token["access_token"] = token_data["access_token"]
             cls._cached_token["expires_at"] = current_time + token_data["expires_in"]
+            logger.info("New Twitch token acquired successfully")
+
             return cls._cached_token["access_token"]
 
+        logger.error(f"Failed to get Twitch token: {token_data}")
         raise Exception(f"Failed to get Twitch token: {token_data}")

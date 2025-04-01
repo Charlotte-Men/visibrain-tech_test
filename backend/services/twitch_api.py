@@ -1,8 +1,12 @@
 import requests
+import logging
 from fastapi import HTTPException
 
 from backend.config import TWITCH_CLIENT_ID
 from backend.services.twitch_auth import TwitchAuth
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 class TwitchAPI:
     @staticmethod
@@ -17,9 +21,12 @@ class TwitchAPI:
             "Authorization": f"Bearer {access_token}"
         }
 
+        logger.info(f"Making request to {url} with params {params}")
         response = requests.get(url, headers=headers, params=params)
 
         if response.status_code == 200:
+            logger.info("Request successful")
             return response.json().get("data", [])
-        else:
-            raise HTTPException(status_code=response.status_code, detail=response.text)
+        
+        logger.error(f"Request failed: {response.status_code} - {response.text}")
+        raise HTTPException(status_code=response.status_code, detail=response.text)
